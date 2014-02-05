@@ -1,0 +1,18 @@
+table {
+	width: 400px;
+}
+caption {
+	font-weight: bold;
+	background-color: #ccc;
+}
+th {
+	background-color: #aaa;
+}
+tr:nth-child(even){
+	background-color: #eee;
+}
+td { 
+	padding: 2px;
+	text-align: right;
+	border-right: 1px solid #666;
+}
