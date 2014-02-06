@@ -80,10 +80,10 @@ $totals = new TotalEarnings(array($network1,$network2,$network3));
 <?php
 
 echo "<h1>I've made a total of $" . ($totals->getEarningsMonth() + $totals->getRefEarningsMonth()) . "  this month.</h1>";
-earningsHTML($network1);
-earningsHTML($network2);
-earningsHTML($network3);
-earningsHTML($totals);
+echo earningsHTML($network1);
+echo earningsHTML($network2);
+echo earningsHTML($network3);
+echo earningsHTML($totals);
 
 
 ?>
