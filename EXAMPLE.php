@@ -15,7 +15,7 @@ function earningsHTML($earnings_object){
 	if($earnings_object->getError()){
 		$html .= "<tr><th>Error</th><td colspan=\"3\">{$earnings_object->getError()}</td></tr>";
 	}else{
-		if($earnings_object->getLeadsMonth() + $earnings_object->getLeadsToday() + $earnings_object->getLeadsYesterday > 0)
+		if($earnings_object->getLeadsMonth() + $earnings_object->getLeadsToday() + $earnings_object->getLeadsYesterday() > 0)
 			$html .= "	<tr>
 							<th>Leads</th>
 							<td>".number_format($earnings_object->getLeadsToday())."</td>
