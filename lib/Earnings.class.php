@@ -151,7 +151,7 @@ class Earnings{
 		if($this->getError()){
 			$html .= "<tr><th>Error</th><td colspan=\"3\">{$this->getError()}</td></tr>";
 		}else{
-			if($this->getLeadsMonth() + $this->getLeadsToday() + $this->getLeadsYesterday > 0)
+			if($this->getLeadsMonth() + $this->getLeadsToday() + $this->getLeadsYesterday() > 0)
 				$html .= "	<tr>
 								<th>Leads</th>
 								<td>".number_format($this->getLeadsToday())."</td>
