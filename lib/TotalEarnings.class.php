@@ -5,7 +5,6 @@ class TotalEarnings extends Earnings{
 		Accumulates statistics from array of Earnings Objects.
 		Usage Example:
 			$total = new TotalEarnings(array($obj1, $obj2));
-			$total->printEarnings();
 
 	*/
 	function __construct($arr = NULL){

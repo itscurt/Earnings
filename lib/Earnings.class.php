@@ -1,4 +1,4 @@
-<?
+<?php
 class Earnings{
 	private $network_name = "";
 	private $earnings_today = 0.00;
@@ -134,66 +134,6 @@ class Earnings{
 	public function setLeadsMonth($a){
 		$a = str_replace(',','',$a);
 		$this->leads_month = $a;
-	}
-
-	public function earningsHTML(){
-		$html = "
-				<table class =\"" . $this->getTableClass() . "\">
-					<caption>{$this->getNetworkName()}</caption>
-					<thead>
-						<tr>
-							<th>&nbsp;</th><th>Today</th><th>Yesterday</th><th>MTD</th>
-
-						</tr>
-					</thead>
-					<tbody>
-				";
-		if($this->getError()){
-			$html .= "<tr><th>Error</th><td colspan=\"3\">{$this->getError()}</td></tr>";
-		}else{
-			if($this->getLeadsMonth() + $this->getLeadsToday() + $this->getLeadsYesterday > 0)
-				$html .= "	<tr>
-								<th>Leads</th>
-								<td>".number_format($this->getLeadsToday())."</td>
-								<td>".number_format($this->getLeadsYesterday())."</td>
-								<td>".number_format($this->getLeadsMonth())."</td>
-							<tr>
-							<tr>
-								<th>EPL</th>
-								<td>$".@number_format($this->getEarningsToday() / $this->getLeadsToday(),2)."</td>
-								<td>$".@number_format($this->getEarningsYesterday() / $this->getLeadsYesterday(),2)."</td>
-								<td>$".@number_format($this->getEarningsMonth() / $this->getLeadsMonth(),2)."</td>
-							<tr>
-
-			";
-			$html .= "		<tr>
-								<th>Earnings</th>
-								<td>$".number_format($this->getEarningsToday(),2)."</td>
-								<td>$".number_format($this->getEarningsYesterday(),2)."</td>
-								<td>$".number_format($this->getEarningsMonth(),2)."</td>
-							<tr>
-			";
-			if($this->getRefEarningsMonth() > 0)
-				$html .= "<tr>
-								<th>Ref Earnings</th>
-								<td>$".number_format($this->getRefEarningsToday(),2)."</td>
-								<td>$".number_format($this->getRefEarningsYesterday(),2)."</td>
-								<td>$".number_format($this->getRefEarningsMonth(),2)."</td>
-							<tr>
-							<tr>
-								<th>Total</th>
-								<td>$".number_format($this->getRefEarningsToday() + $this->getEarningsToday(),2)."</td>
-								<td>$".number_format($this->getRefEarningsYesterday() + $this->getEarningsYesterday(),2)."</td>
-								<td>$".number_format($this->getRefEarningsMonth() + $this->getEarningsMonth(),2)."</td>
-							<tr>
-			";
-		}
-		$html .= "</tbody></table>";
-		return $html;
-	}
-
-	public function printEarnings(){
-		print($this->earningsHTML());
 	}
 }
 ?>
