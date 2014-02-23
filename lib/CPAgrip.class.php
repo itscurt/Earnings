@@ -37,6 +37,7 @@ class CPAgrip extends Earnings{
 				$elems->item(16)->nodeValue
 			);
 		}
+		curl_close($ch);
 	}
 }
 

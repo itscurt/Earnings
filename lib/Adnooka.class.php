@@ -37,6 +37,7 @@ class Adnooka extends Earnings{
 				$elems->item(7)->nodeValue
 			);
 		}
+		curl_close($ch);
 	}
 }
 

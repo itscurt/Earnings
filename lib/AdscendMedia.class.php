@@ -27,6 +27,7 @@ class AdscendMedia extends Earnings{
 			$this->setLeads($res[1][0],$res[1][1],$res[1][2]);
 			$this->setEarnings($res[2][0],$res[2][1],$res[2][2]);
 		}
+		curl_close($ch);
 	}
 }
 
