@@ -139,7 +139,7 @@ class Earnings{
 	public function earningsHTML(){
 		$html = "
 				<table class =\"" . $this->getTableClass() . "\">
-					<caption>{$this->getNetworkName()}</caption>
+					<caption>" . $this->getNetworkName() . "</caption>
 					<thead>
 						<tr>
 							<th>&nbsp;</th><th>Today</th><th>Yesterday</th><th>MTD</th>
@@ -149,7 +149,7 @@ class Earnings{
 					<tbody>
 				";
 		if($this->getError()){
-			$html .= "<tr><th>Error</th><td colspan=\"3\">{$this->getError()}</td></tr>";
+			$html .= "<tr><th>Error</th><td colspan=\"3\">" . $this->getError() . "</td></tr>";
 		}else{
 			if($this->getLeadsMonth() + $this->getLeadsToday() + $this->getLeadsYesterday() > 0)
 				$html .= "	<tr>
