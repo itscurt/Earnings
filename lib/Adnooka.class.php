@@ -11,13 +11,17 @@ class Adnooka extends Earnings{
 		$this->setNetworkName("Adnooka Statistics");
 		$ch = curl_init();
 		$cookie_file_path="/tmp/adnooka";
+		$postStr = http_build_query(array(
+			"email" => $email,
+			"password" => base64_decode($base64pw)
+		));
 		curl_setopt($ch, CURLOPT_URL, "http://adnooka.com/login");
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie_file_path);
 		curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie_file_path);
 		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, "email=" . urlencode($email) . "&password=" . urlencode(base64_decode($base64pw)));
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $postStr);
 		$adnookdata = curl_exec($ch);
 		if(strpos(curl_getinfo($ch, CURLINFO_EFFECTIVE_URL), "/login")){
 			$this->setError("Invalid publisher email or password.");
