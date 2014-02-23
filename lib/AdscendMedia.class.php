@@ -12,13 +12,20 @@ class AdscendMedia extends Earnings{
 		$this->setNetworkName("Adscend Media Statistics");
 		$ch = curl_init();
 		$cookie_file_path="/tmp/adscendlogin";
+		$postStr = http_build_query(array(
+			"submitted" => "1",
+			"email" => $email,
+			"password" => base64_decode($base64pw),
+			"imageField.x" => "1",
+			"imageField.y" => "-1"
+		));
 		curl_setopt($ch, CURLOPT_URL, "https://adscendmedia.com/login.php");
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie_file_path);
 		curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie_file_path);
 		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, "submitted=1&email=" . urlencode($email) . "&password=" . urlencode(base64_decode($base64pw)) . "&imageField.x=1&imageField.y=-1");
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $postStr);
 		$adscenddata = curl_exec($ch);
 		if(strpos(curl_getinfo($ch, CURLINFO_EFFECTIVE_URL), "login.php")){
 			$this->setError("Invalid publisher email or password.");
@@ -27,6 +34,7 @@ class AdscendMedia extends Earnings{
 			$this->setLeads($res[1][0],$res[1][1],$res[1][2]);
 			$this->setEarnings($res[2][0],$res[2][1],$res[2][2]);
 		}
+		curl_close($ch);
 	}
 }
 

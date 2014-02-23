@@ -11,13 +11,18 @@ class CPAgrip extends Earnings{
 		$this->setNetworkName("CPAgrip Statistics");
 		$ch = curl_init();
 		$cookie_file_path="/tmp/cpagrip";
+		$postStr = http_build_query(array(
+			"login" => "true",
+			"email" => $email,
+			"pwd" => base64_decode($base64pw)
+		));
 		curl_setopt($ch, CURLOPT_URL, "https://www.cpagrip.com/admin/index.php");
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie_file_path);
 		curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie_file_path);
 		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, "login=true&email=" . urlencode($email) . "&pwd=" . urlencode(base64_decode($base64pw)));
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $postStr);
 		$data = curl_exec($ch);
 		if(strpos($data, "LOGIN FAILED")){
 			$this->setError("Invalid publisher email or password.");
@@ -37,6 +42,7 @@ class CPAgrip extends Earnings{
 				$elems->item(16)->nodeValue
 			);
 		}
+		curl_close($ch);
 	}
 }
 
